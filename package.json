@@ -1,8 +1,7 @@
 {
-  "name": "vue-webpack",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "vue-webpack-starter",
+  "version": "0.0.1",
+  "description": "Minimal starter pack for Vue web applications",
   "scripts": {
     "start": "webpack-dev-server --inline --progress",
     "build": "webpack --mode production"

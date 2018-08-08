@@ -3,6 +3,7 @@
 !package.json
 !webpack.config.js
 !index.html
+!README.md
 !src
 !dist
 !src/**/*
