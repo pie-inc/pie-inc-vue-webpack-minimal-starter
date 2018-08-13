@@ -17,7 +17,8 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.js', '.vue', '.json'],
       alias: {
-        '@': path.join(__dirname, 'src')
+        '@': path.join(__dirname, 'src'),
+        vue: (this.mode === 'development') ? 'vue/dist/vue' : 'vue/dist/vue.min'
       }
     },
     module: {
