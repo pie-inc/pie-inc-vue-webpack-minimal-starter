@@ -13,7 +13,6 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
-      publicPath: path.resolve(__dirname, 'dist')
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
@@ -70,27 +69,26 @@ module.exports = (env, argv) => {
       ]
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
       new webpack.NoEmitOnErrorsPlugin(),
       new VueLoaderPlugin(),
-      // https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'index.html',
-        inject: true
+        template: __dirname + '/src/index.ejs',
+        inject: 'body'
       }),
       new NotifierPlugin({
         alwaysNotify: true
       })
     ],
-    devtool:
-      argv.mode === 'development'
-        ? 'cheap-module-eval-source-map'
-        : '#source-map',
-    devServer: {
-      host: 'localhost',
-      port: '4000'
+    devtool: '#source-map',
+    serve: {
+      compress: true,
+      host: '0.0.0.0',
+      port: 4000,
+      hot: {
+        logLevel: 'info',
+        logTime: true
+      }
     },
     node: {
       setImmediate: false,

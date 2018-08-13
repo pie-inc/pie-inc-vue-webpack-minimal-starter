@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Minimal starter pack for Vue web applications",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress",
+    "start": "webpack-serve",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -19,8 +19,9 @@
     "vue-style-loader": "^4.1.1",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-notifier": "^1.6.0"
+    "webpack-hot-client": "^4.1.1",
+    "webpack-notifier": "^1.6.0",
+    "webpack-serve": "^2.0.2"
   },
   "dependencies": {
     "vue": "^2.5.17"
