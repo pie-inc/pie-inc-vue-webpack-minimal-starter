@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Minimal starter pack for Vue web applications",
   "scripts": {
-    "start": "webpack-serve",
+    "start": "webpack-dev-server --mode development --hot --inline",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -14,14 +14,21 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.56",
     "@babel/preset-env": "^7.0.0-beta.56",
     "babel-loader": "^8.0.0-beta.4",
+    "clipboardy": "^1.2.3",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "terser-webpack-plugin": "^1.2.1",
+    "url-loader": "^1.1.2",
+    "vue-loader": "^15.4.2",
+    "vue-router": "^3.0.2",
     "vue-style-loader": "^4.1.1",
+    "vue-template-compiler": "^2.5.21",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",
-    "webpack-hot-client": "^4.1.1",
+    "webpack-dev-server": "^3.1.14",
     "webpack-notifier": "^1.6.0",
-    "webpack-serve": "^2.0.2"
+    "webpackbar": "^3.1.4"
   },
   "dependencies": {
     "vue": "^2.5.17"

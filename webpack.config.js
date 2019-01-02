@@ -1,8 +1,33 @@
 const path = require('path');
 const webpack = require('webpack');
 const NotifierPlugin = require('webpack-notifier');
+const WebpackBar = require('webpackbar');
+const clip = require('clipboardy');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+const stats = {
+  all: false,
+  assets: true,
+  cachedAssets: true,
+  children: false,
+  chunks: false,
+  entrypoints: true,
+  errorDetails: true,
+  errors: true,
+  hash: true,
+  modules: false,
+  performance: true,
+  publicPath: true,
+  timings: true,
+  warnings: false,
+  exclude: [
+    'node_modules'
+  ]
+};
 
 module.exports = (env, argv) => {
   return {
@@ -70,7 +95,7 @@ module.exports = (env, argv) => {
       ]
     },
     plugins: [
-      new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+      new WebpackBar(),
       new webpack.NoEmitOnErrorsPlugin(),
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
@@ -82,13 +107,33 @@ module.exports = (env, argv) => {
       })
     ],
     devtool: '#source-map',
-    serve: {
-      compress: true,
-      host: '0.0.0.0',
+    performance: { hints: false },
+    optimization: {
+      minimizer: [
+        new OptimizeCSSAssetsPlugin({
+          cssProcessorOptions: {
+            discardComments: {
+              removeAll: true
+            },
+            discardEmpty: true,
+            discardOverridden: true
+          }
+        }),
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            ecma: 6,
+          },
+        })
+      ]
+    },
+    stats: stats,
+    devServer: {
+      stats: stats,
       port: 4000,
-      hot: {
-        logLevel: 'info',
-        logTime: true
+      historyApiFallback: true,
+      after: function(app, server) {
+        clip.writeSync('http://localhost:4000/');
       }
     },
     node: {
